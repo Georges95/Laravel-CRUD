@@ -2,7 +2,7 @@
 
 @section('content')
 
-<a href="{{route('create')}}" class= "btn btn-primary">Ajouter une tache</a>
+<a href="{{route('task.create')}}" class= "btn btn-primary">Ajouter une tache</a>
     <table class="table">
 
         <thead>
@@ -15,18 +15,34 @@
         </thead>
 
         <tbody>
+            @foreach ($tasks as $task)
+
             <tr>
                 <td scope="row"></td>
-                <td>Tache 1</td>
-                <td>Description tache 1</td>
+                <td>{{$task->title}}</td>
+                <td>{{$task->description}}</td>
                 <td>
-                    <span class="badge text-bg-success">Terminé</span>
+                    @if ($task->status == 1)
+                        <span class="badge text-bg-success">Terminé</span>
+                    @else
+                        <span class="badge text-bg-warning">En cours</span>
+                    @endif
+
                 </td>
                 <td>
-                    <a href="#" class="btn btn-info">Modifier</a>
-                    <a href="#" class="btn btn-danger">Supprimer</a>
+                    <a href="{{route('task.edit', $task->id)}}" class="btn btn-info">Modifier</a>
+
+                    <form action="{{ route('task.destroy', $task->id) }}" method="post" style="display: inline;">
+
+                    @csrf
+
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes vous sure de vouloir supprimer cette tache ?')">Supprimer</button>
+                    </form>
                 </td>
             </tr>
+
+            @endforeach
 
         </tbody>
 
