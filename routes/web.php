@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskSecController;
 
@@ -16,9 +17,13 @@ use App\Http\Controllers\TaskSecController;
 */
 
 
-Route::get('/', [TaskController::class, 'index'])->name('index');
+Route::get('/', [TaskController::class, 'index'])->name('index')->middleware('auth');
 
 Route::resource('/task', TaskSecController::class);
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login/post', [AuthController::class, 'login'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Route::get('/tache/creer', [TaskController::class, 'create'])->name('create');
 // Route::post('/tache/creer-post', [TaskController::class, 'store'])->name('store');

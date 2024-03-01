@@ -3,6 +3,8 @@
 @section('content')
 
 <a href="{{route('task.create')}}" class= "btn btn-primary">Ajouter une tache</a>
+<a href="{{route('logout')}}" class= "btn btn-primary">Se connecter</a>
+
 @if (session('success'))
     <div class="alert alert-success">{{(session('success'))}}</div>
 @endif
