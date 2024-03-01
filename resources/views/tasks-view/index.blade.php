@@ -3,7 +3,12 @@
 @section('content')
 
 <a href="{{route('task.create')}}" class= "btn btn-primary">Ajouter une tache</a>
-    <table class="table">
+@if (session('success'))
+    <div class="alert alert-success">{{(session('success'))}}</div>
+@endif
+
+
+<table class="table">
 
         <thead>
             <tr>
@@ -15,10 +20,9 @@
         </thead>
 
         <tbody>
-            @foreach ($tasks as $task)
+            @foreach($tasks as $task)
 
             <tr>
-                <td scope="row"></td>
                 <td>{{$task->title}}</td>
                 <td>{{$task->description}}</td>
                 <td>
@@ -29,6 +33,7 @@
                     @endif
 
                 </td>
+
                 <td>
                     <a href="{{route('task.edit', $task->id)}}" class="btn btn-info">Modifier</a>
 

@@ -6,6 +6,8 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 
+
+
 class TaskSecController extends Controller
 {
     /**
@@ -21,7 +23,7 @@ class TaskSecController extends Controller
      */
     public function create()
     {
-        return view('tasks-view.index');
+        return view('tasks-view.create');
     }
 
     /**
@@ -29,7 +31,7 @@ class TaskSecController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        $request->validated($request->all);
+        $request->validated($request->all());
 
         Task::create([
             'title'=>$request->title,
@@ -56,6 +58,7 @@ class TaskSecController extends Controller
     {
 
         $request->validated($request->all);
+
         $task->update([
             'title'=>$request->title,
             'description'=>$request->description,
