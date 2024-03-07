@@ -57,7 +57,7 @@ class TaskSecController extends Controller
     public function update(TaskRequest $request, Task $task)
     {
 
-        $request->validated($request->all);
+        $request->validated($request->all());
 
         $task->update([
             'title'=>$request->title,

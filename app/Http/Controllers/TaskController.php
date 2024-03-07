@@ -31,12 +31,14 @@ class TaskController extends Controller
 
         return redirect()->route('index')->with('success', 'Tache enregitrée avec succès');
     }
+    
 
     public function edit(int $id){
         $task = Task::where('id', $id)->first();
 
         return view('tasks-view.create', compact('task'));
     }
+
 
     public function update(Request $request, int $id){
         $request->validate([
